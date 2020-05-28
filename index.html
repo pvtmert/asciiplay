@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title> epic asciicast player </title>
+	<link rel="stylesheet" type="text/css" href="./asciinema-player.css" />
+</head>
+<body>
+	<main></main>
+</body>
+<style>
+	@media (prefers-color-scheme: dark) {
+		html, body, main {
+			background: #222;
+		}
+	}
+</style>
+<script src="./asciinema-player.js"></script>
+<script >
+
+	window.onhashchange = function(e) {
+		let options = ((window.location.hash.length > 1)
+			? JSON.parse(window.location.hash.substring(1))
+			: Object.fromEntries(
+				window.location.search.substring(1).split("&").map(i => i.split("="))
+			)
+		);
+		document.querySelector("main").innerHTML = (`
+			<asciinema-player
+				cols=${options.cols            || 80}
+				rows=${options.rows            || 25}
+				autoplay=${options.autoplay    || false}
+				start-at=${options.start       || "00:00"}
+				preload=${options.preload      || false}
+				speed=${options.speed          || 1.0}
+				loop=${options.loop            || false}
+				idle-time-limit=${options.idle || 999999999.0}
+				poster=${options.poster        || "npt:00:00"}
+				font-size=${options.font       || "medium"}
+				theme=${options.theme          || "tango"}
+				title=${options.title          || "epic screencast"}
+				src=${options.source           || "./asciinema/resources/public/asciicasts/frames-10386.json"}
+			></asciinema-player>
+		`)
+		return;
+	}
+
+	window.onload = function(e) {
+		return window.onhashchange(e);
+	}
+
+</script>
+</html>

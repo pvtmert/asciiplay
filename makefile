@@ -2,7 +2,7 @@
 
 RELEASE := v2.6.1
 FILES   := $(addprefix asciinema-player, .js .css)
-PORT    := 80001
+PORT    := 8001
 
 all: $(FILES)
 

@@ -23,15 +23,16 @@
 				window.location.search.substring(1).split("&").map(i => i.split("="))
 			)
 		);
+		let cols = (options.cols ? `cols=${options.cols}` : "");
+		let rows = (options.rows ? `rows=${options.rows}` : "");
 		document.querySelector("main").innerHTML = (`
 			<asciinema-player
-				cols=${options.cols            || 80}
-				rows=${options.rows            || 25}
-				autoplay=${options.autoplay    || false}
+				${cols} ${rows}
+				${options.autoplay ? "autoplay" : ""}
+				${options.preload  ? "preload"  : ""}
+				${options.loop     ? "loop"     : ""}
 				start-at=${options.start       || "00:00"}
-				preload=${options.preload      || false}
 				speed=${options.speed          || 1.0}
-				loop=${options.loop            || false}
 				idle-time-limit=${options.idle || 999999999.0}
 				poster=${options.poster        || "npt:00:00"}
 				font-size=${options.font       || "medium"}
